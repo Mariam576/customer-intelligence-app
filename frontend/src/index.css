@@ -1,0 +1,175 @@
+@import "@fontsource-variable/hanken-grotesk/wght.css";
+@import "tailwindcss";
+
+/* Design tokens. Every colour in the app is one of these roles, so light
+   and dark mode swap in one place. Chart colours come from a palette that
+   was checked for colour-blind separation in both modes. */
+:root {
+  color-scheme: light;
+  --plane: #eef2f1;
+  --surface: #fcfcfb;
+  --sunken: #f2f5f4;
+  --ink: #17252a;
+  --ink-2: #4c5a5e;
+  --ink-3: #6b7779;
+  --line: #dde4e2;
+  --grid: #e6ebe9;
+  --axis: #c2ccca;
+
+  --rail: #0f3d45;
+  --rail-ink: #e9f2f1;
+  --rail-ink-2: #a9c4c6;
+  --rail-active: #1c5863;
+
+  --accent: #0f6672;
+  --accent-wash: #e1eeee;
+
+  /* categorical series, fixed order */
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+  --neutral-mark: #a8b1b1;
+
+  /* diverging pair for "pushes risk down / up" */
+  --lower: #2a78d6;
+  --raise: #e34948;
+
+  /* status, always shown with an icon and a label */
+  --good: #0ca30c;
+  --warning: #fab219;
+  --critical: #d03b3b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --plane: #0e1112;
+    --surface: #1a1a19;
+    --sunken: #222322;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #9a9992;
+    --line: #30302e;
+    --grid: #2c2c2a;
+    --axis: #44443f;
+    --rail: #0b2c32;
+    --rail-ink: #e9f2f1;
+    --rail-ink-2: #9dbabc;
+    --rail-active: #164852;
+    --accent: #6cc0cb;
+    --accent-wash: #17333a;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --s4: #c98500;
+    --neutral-mark: #6e6e69;
+    --lower: #3987e5;
+    --raise: #e66767;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --plane: #0e1112;
+  --surface: #1a1a19;
+  --sunken: #222322;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --ink-3: #9a9992;
+  --line: #30302e;
+  --grid: #2c2c2a;
+  --axis: #44443f;
+  --rail: #0b2c32;
+  --rail-ink: #e9f2f1;
+  --rail-ink-2: #9dbabc;
+  --rail-active: #164852;
+  --accent: #6cc0cb;
+  --accent-wash: #17333a;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --s4: #c98500;
+  --neutral-mark: #6e6e69;
+  --lower: #3987e5;
+  --raise: #e66767;
+}
+
+@theme inline {
+  --font-sans: "Hanken Grotesk Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-plane: var(--plane);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-axis: var(--axis);
+  --color-rail: var(--rail);
+  --color-rail-ink: var(--rail-ink);
+  --color-rail-ink-2: var(--rail-ink-2);
+  --color-rail-active: var(--rail-active);
+  --color-accent: var(--accent);
+  --color-accent-wash: var(--accent-wash);
+  --color-s1: var(--s1);
+  --color-s2: var(--s2);
+  --color-s3: var(--s3);
+  --color-s4: var(--s4);
+  --color-neutral-mark: var(--neutral-mark);
+  --color-lower: var(--lower);
+  --color-raise: var(--raise);
+  --color-good: var(--good);
+  --color-warning: var(--warning);
+  --color-critical: var(--critical);
+}
+
+html {
+  background: var(--plane);
+}
+
+body {
+  margin: 0;
+  background: var(--plane);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.012em;
+}
+
+/* Numbers that line up in columns */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Recharts draws its own focus outline on the plot area; ours is enough. */
+.recharts-wrapper:focus,
+.recharts-surface:focus {
+  outline: none;
+}
+
+.recharts-cartesian-axis-tick-value {
+  font-size: 12px;
+  fill: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

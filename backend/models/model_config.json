@@ -1,0 +1,47 @@
+{
+    "project": "AI Customer Behavior, Churn Risk & Sales Intelligence",
+    "segmentation": {
+        "algorithm": "KMeans",
+        "n_clusters": 4,
+        "input_features": [
+            "Recency_Days",
+            "Frequency",
+            "Monetary"
+        ],
+        "preprocessing": [
+            "numpy.log1p",
+            "StandardScaler"
+        ],
+        "segment_names": {
+            "0": "Previously Active Customers",
+            "1": "Recent Developing Customers",
+            "2": "High-Value Active Customers",
+            "3": "Infrequent / Inactive Customers"
+        },
+        "training_reference_date": "2011-12-10"
+    },
+    "churn_prediction": {
+        "algorithm": "CatBoostClassifier",
+        "prediction_target": "No recorded positive merchandise purchase within 90 days",
+        "feature_columns": [
+            "Frequency",
+            "Monetary",
+            "Total_Units",
+            "Unique_Products",
+            "Recency_Days",
+            "Customer_Tenure_Days",
+            "Avg_Invoice_Value",
+            "Active_Months"
+        ],
+        "probability_calibration": "Platt scaling",
+        "calibration_input": "Logit of CatBoost probability",
+        "probability_threshold": null,
+        "training_snapshots": [
+            "2010-10-01",
+            "2011-01-01"
+        ],
+        "calibration_snapshot": "2011-04-01",
+        "evaluation_snapshot": "2011-07-01",
+        "forecast_horizon_days": 90
+    }
+}
